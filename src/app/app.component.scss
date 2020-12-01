@@ -1,0 +1,54 @@
+.bigImgContainer
+{
+  position: relative;
+  margin-top: 55px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.counter
+{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(240, 39, 39);
+  top: -50px;
+  height: 35px;
+  width: 150px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #fff;
+}
+.pageContainer
+{
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.smallImgContainer
+{
+  padding-left: 150px;
+  padding-right: 150px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.offersContainer
+{
+  padding-left: 60px;
+  padding-right: 60px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.discoverContainer
+{
+  padding-left: 260px;
+  padding-right: 260px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
