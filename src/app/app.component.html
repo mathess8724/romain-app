@@ -9,6 +9,8 @@
 
 <app-header></app-header>
 
+
+
 <div class="container-fluid container-1">
   <div class="isSHidden col-xs-6 col-md-3" style="margin: 0px;">
     <div class="card bg-dark text-white">
@@ -41,12 +43,26 @@
     </div>
   </div>
   <div class="counter">
-    12 : 24 :02
+   12 : 21 : 54
+    <button style="margin-top: 30px;" (click)="plus()">change</button>
   </div>
 </div>
 
 
 <div class="container-fluid container-2">
+
+
+  <div>
+    <div *ngIf="PrismicData" >
+      cards : {{ PrismicData[0].data }}
+      <div >
+        <div>
+          object :
+        </div>
+
+      </div>
+    </div>
+  </div>
 
     <p style="text-align: center;">Do everything comfortably from home with My Sunrise</p>
 
