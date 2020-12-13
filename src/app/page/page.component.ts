@@ -1,10 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
+import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory/lib/fragmentMatcher';
+import fragmentTypes from '../../../src/app/introspectionFragment/fragmentTypes.json';
+let InMemoryCache = require("apollo-cache-inmemory").InMemoryCache;
+let ApolloClient = require("apollo-client").ApolloClient;
+let gql = require("graphql-tag");
+let PrismicLink = require("apollo-link-prismic").PrismicLink;
 
-// interface Demo {
-//   key: string;
-//   value: string;
-// }
+const fragmentMatcher = new IntrospectionFragmentMatcher(
+  { introspectionQueryResultData: fragmentTypes },
+);
 
 @Component({
   selector: 'app-page',
@@ -15,10 +20,21 @@ export class PageComponent implements OnInit {
   title = 'romain-app';
   PrismicData: any;
   test: any = [];
+  prismicData: any = {
+    'cardsGroupSmall': [],
+    'cardsGroupMedium': []
+  };
+  loading = true;
+  error: any;
+  url: string = '';
+  notFound = false;
+  cardsGroupSmall: any;
+  cardsGroupMedium: any;
 
   constructor(private readonly route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       console.log('Page loaded => ' + params.pageName);
+      this.url = `/${params.pageName}`;
       // todo 1 => Search page where field "pageName" is params.pageName.
       // todo 2 => Get all the slices of that page. Per slice type.
       // todo 3 => For each slice get all the elements in it.
@@ -26,70 +42,79 @@ export class PageComponent implements OnInit {
       // and in each slice over the elements (individual card) and display each.
     });
   }
+  client = new ApolloClient({
+    link: PrismicLink({
+      uri: "https://sunrise-app.prismic.io/graphql"
+    }),
+    cache: new InMemoryCache({ fragmentMatcher })
+  });
+
 
   ngOnInit(): void {
-    // this.PrismicData = Object.entries(this.getPrismic());
-    this.getPrismic().then((results: any) => {
-      console.log(results);
+    this.client.query({
+      query: gql`
+      query{
+        page(uid:"plop",lang:"en-us"){
+          url
+          body{
+            ... on PageBodyCardsGroupSmall{
+              fields{
+                cardsgroupsmall{
+                  ... on CardSmall{
+                    title
+                    cardImage
+                    cardLink
+                    cardBackgroundColor
+                    ismobile
+                  }
+                }
+              }
+            }
+          ... on PageBodyCardsGroupMedium{
+            fields{
+              cardsGroupMedium{
+                ... on CardMedium{
+                  title
+                  cardImg
+                  cardBtnText
+                  cardBtnLink
+                  cardBackgroundColor
+                  ismobile
+                  cardText
+                  }
+                }
+              }
+            }
+          }   
+        }
+      }
+      `
+    }).then((response: any) => {
+      let cardsGroupSmall : Object;
+      let cardsGroupMedium: Object;
+      //console.log('response : ', response);      
+      //this.prismicData = response;
+      //console.log(this.url);
+      if(response.data.page.url === this.url === false){
+        this.notFound = true      
+        return;
+      }     
+      response.data.page.body.map((elem:any, index: number ) => (        
+        elem.__typename === 'PageBodyCardsGroupSmall' ? this.cardsGroupSmall = elem.fields : console.log(),
+        elem.__typename === 'PageBodyCardsGroupMedium' ? this.cardsGroupMedium = elem.fields : console.log()        
+      ));
+      //console.log('small cards group :', cardsGroupSmall);
+      //console.log('medium cards group :', cardsGroupMedium);
+      this.prismicData = {
+        'cardsGroupSmall' : this.cardsGroupSmall,
+        'cardsGroupMedium' : this.cardsGroupMedium
+      }
+      console.log(this.prismicData);         
+    }).catch((error: any) => {
+      console.error(error);
     });
+   
   }
 
-  async getPrismic(): Promise<any>{
-    const Prismic = require('prismic-javascript'); // todo is there not an angular library for that?
-    const apiEndpoint = 'https://sunrise-app.cdn.prismic.io/api/v2';
-    Prismic.default.getApi(apiEndpoint).then((api: any) => {
-      return api.query(
-        Prismic.default.Predicates.at('document.type', 'card-my-sunrise'), // todo should search page. with url field = "xxx"
-        {orderings: '[card-my-sunrise.date ]'}
-      );
-    }).then((response: any) => response.results, (err: any) => {
-      console.log('Something went wrong: ', err);
-    });
-  }
-
-
-  // endpointPrismic(): void {
-  //   const axios = require('axios');
-  //   // Make a request for a user with a given ID
-  //   axios.get('https://sunrise-app.cdn.prismic.io/api/v2')
-  //     .then((response: any) => {
-  //       // handle success
-  //       console.log(response);
-  //     })
-  //     .catch((error: any) => {
-  //       // handle error
-  //       console.log(error);
-  //     })
-  //     .then(() => {
-  //       // always executed
-  //     });
-  // }
-
-  // createDemo(mydemo: any): Array<Demo> {
-  //   const tempdemo: Array<Demo> = [];
-  //
-  //   // Caution: use "of" and not "in"
-  //   for (const key of Object.keys(mydemo)) {
-  //     tempdemo.push({key, value: mydemo[key]});
-  //   }
-  //
-  //   return tempdemo;
-  // }
-
-
-  // changeData(data: any): void {
-  //   // console.log(this.createDemo(data))
-  //   const t = data;
-  //   t.map((entri: any, index: any) => (
-  //     console.log(entri.id)
-  //   ));
-  // }
-
-  plus(): void {
-    this.PrismicData = this.getPrismic();
-    // console.log(this.getPrismic())
-  }
-
-  // counter(): void {
-  // }
+  
 }
