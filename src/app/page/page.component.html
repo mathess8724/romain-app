@@ -51,8 +51,8 @@
   
     <p style="text-align: center;">Do everything comfortably from home with My Sunrise</p>
   
-    <div class="row" style="width: 100%; display: flex; justify-content: center;" *ngFor="let card of prismicData.cardsGroupSmall">
-      <div class="col-6 col-md-2">
+    <div class="row" style="width: 100%; display: flex; justify-content: center;" >
+      <div class="col-6 col-md-2" *ngFor="let card of prismicData.cardsGroupSmall">
         <div class="card container-2-card " >
           <img src="{{card.cardsgroupsmall.cardImage.url}}" style="margin-top: 15px; height: 80px; width: 80px;"
                class="card-img-top" alt="{{card.cardsgroupsmall.cardImage.url}}">
