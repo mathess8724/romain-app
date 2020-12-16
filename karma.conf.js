@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/romain-app'),
+      dir: require('path').join(__dirname, './coverage/sunrise-prismic'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "romain-app": {
+    "sunrise-prismic": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/romain-app",
+            "outputPath": "dist/sunrise-prismic",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,7 +35,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              
+
             ]
           },
           "configurations": {
@@ -71,18 +71,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "romain-app:build"
+            "browserTarget": "sunrise-prismic:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "romain-app:build:production"
+              "browserTarget": "sunrise-prismic:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "romain-app:build"
+            "browserTarget": "sunrise-prismic:build"
           }
         },
         "test": {
@@ -119,16 +119,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "romain-app:serve"
+            "devServerTarget": "sunrise-prismic:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "romain-app:serve:production"
+              "devServerTarget": "sunrise-prismic:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "romain-app"
+  "defaultProject": "sunrise-prismic"
 }

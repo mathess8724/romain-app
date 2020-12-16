@@ -24,7 +24,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher(
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
-  title = 'romain-app';
+  title = 'sunrise-prismic';
   PrismicData: any;
   test: any = [];
   // prismic data array
