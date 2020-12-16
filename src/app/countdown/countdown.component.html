@@ -1,1 +1,11 @@
-<p>countdown works!</p>
+<div class="container" style="padding-left: 0; padding-right: 0;">
+   <div class="countdownIco">
+      <img src="{{icoUrl}}" alt="" style="height: 25px; width: 25px; " >
+   </div>
+   <div  *ngIf="countdown.minutes" class="countdownNumber">
+       {{countdown.days}} days {{countdown.hours}} h {{countdown.minutes}} m {{countdown.seconds}} s 
+   </div>
+   <div>
+      
+   </div>
+</div>

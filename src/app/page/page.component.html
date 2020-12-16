@@ -3,7 +3,6 @@
   </div>
   <div *ngIf="!notFound && prismicData">
   <app-header></app-header>
-
   <div  class="container-fluid container-1">
     <div class="isSHidden col-xs-6 col-md-3" style="margin: 0px;">
       <div class="card bg-dark text-white">
@@ -17,7 +16,10 @@
       </div>
     </div>
     <div class="col-xs-12 col-md-5" style="margin: 5px;">
-      <div class="card bg-dark text-white">
+      <div class="card bg-dark text-white" style="position: relative; display: flex; align-items: center;">
+        <div *ngIf="prismicData.countdown">
+          <app-countdown [icoUrl]="prismicData.countdown[0].discountico.url"  [finishdate]="prismicData.countdown[0].discountdate"></app-countdown>
+        </div>
         <img src="../assets/img/macbook.jpg" style="height: 280px;" class="card-img" alt="...">
         <div class="card-img-overlay">
           <h5 class="card-title">Card title</h5>

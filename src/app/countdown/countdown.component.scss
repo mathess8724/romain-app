@@ -1,0 +1,14 @@
+.container
+{
+    position: absolute;
+    top: -25px;
+    //margin-left: -60px;
+    background-color: rgb(238, 238, 238);
+    color: red;
+    height: 50px;
+    width: 250px;
+    border: 1px solid black;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}

@@ -8,18 +8,19 @@ import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './page/page.component';
 import { CountdownComponent } from './countdown/countdown.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
     PageComponent,
-    CountdownComponent
+    CountdownComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,    
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

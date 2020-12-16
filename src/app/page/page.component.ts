@@ -30,7 +30,8 @@ export class PageComponent implements OnInit {
   // prismic data array
   prismicData: any = {
     'cardsGroupSmall': [],
-    'cardsGroupMedium': []
+    'cardsGroupMedium': [],
+    'countdown': null
   };
   //---------------------
 
@@ -41,6 +42,7 @@ export class PageComponent implements OnInit {
   // prismic data temp variable (used in the prismic graphql query)
   cardsGroupSmall: any;
   cardsGroupMedium: any;
+  countdown = [];
   //-------------------------
   constructor(private readonly route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
@@ -101,11 +103,19 @@ export class PageComponent implements OnInit {
                 }
               }
             }
+            __typename
+            ... on PageBodyDiscountcountdown{
+              fields{
+                discountico
+                discountdate
+              }
+            }
           }   
         }
       }
       `
-    }).then((response: any) => {      
+    }).then((response: any) => {  
+      //console.log(response)    
       // if the url page don't match with the url from prismic page document, then error 404 not found
       if(response.data.page.url === this.url === false){
         this.notFound = true      
@@ -114,14 +124,16 @@ export class PageComponent implements OnInit {
       // map of the response and adding every slice required in the prismic data temp array     
       response.data.page.body.map((elem:any, index: number ) => (        
         elem.__typename === 'PageBodyCardsGroupSmall' ? this.cardsGroupSmall = elem.fields : console.log(),
-        elem.__typename === 'PageBodyCardsGroupMedium' ? this.cardsGroupMedium = elem.fields : console.log()        
+        elem.__typename === 'PageBodyCardsGroupMedium' ? this.cardsGroupMedium = elem.fields : console.log(),        
+        elem.__typename === 'PageBodyDiscountcountdown' ? this.countdown = elem.fields : console.log()        
       ));
       // then, adding data in prismic data array
       this.prismicData = {
         'cardsGroupSmall' : this.cardsGroupSmall,
-        'cardsGroupMedium' : this.cardsGroupMedium
+        'cardsGroupMedium' : this.cardsGroupMedium,
+        'countdown': this.countdown
       }
-      console.log(this.prismicData); 
+      console.log(this.prismicData.countdown[0].discountdate); 
     // if error =>        
     }).catch((error: any) => {
       console.error(error);
