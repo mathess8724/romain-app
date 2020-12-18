@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-fragment": "node src/app/introspectionFragment/schemaQuery.js"
+    "build-fragment": "node src/app/graphql/schemaQuery.js"
   },
   "private": true,
   "dependencies": {

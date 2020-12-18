@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import { IntrospectionFragmentMatcher } from 'apollo-cache-inmemory/lib/fragmentMatcher';
-import fragmentTypes from '../../../src/app/introspectionFragment/fragmentTypes.json';
+import fragmentTypes from '../graphql/fragmentTypes.json';
+import query from 'src/app/graphql/query'; // this is a query function who query graphql db with the url param
 let InMemoryCache = require("apollo-cache-inmemory").InMemoryCache;
 let ApolloClient = require("apollo-client").ApolloClient;
 let gql = require("graphql-tag");
 let PrismicLink = require("apollo-link-prismic").PrismicLink;
 
-// initialyze the fragmentMatcher for querys
+// initialize the fragmentMatcher for querys
 // !! the fragmentTypes json file is a scheman who is created with 'schemaQuery.js' file, don't forget 
 // to use 'npm run build-fragment' if the schema query change on prismic
 // or you get an heuristic apollo error !!
@@ -24,15 +25,13 @@ const fragmentMatcher = new IntrospectionFragmentMatcher(
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
+  @Input() ngSwitch: any;
+
   title = 'sunrise-prismic';
   PrismicData: any;
   test: any = [];
   // prismic data array
-  prismicData: any = {
-    'cardsGroupSmall': [],
-    'cardsGroupMedium': [],
-    'countdown': null
-  };
+  prismicData:any = [];
   //---------------------
 
   loading = true;
@@ -50,15 +49,9 @@ export class PageComponent implements OnInit {
       // check the page url and put it in variable
       this.url = `/${params.pageName}`;
       //--------------------------------
-
-      // todo 1 => Search page where field "pageName" is params.pageName. => OK!
-      // todo 2 => Get all the slices of that page. Per slice type. => OK!
-      // todo 3 => For each slice get all the elements in it. => OK!
-      // todo 4 => in template, loop over the slices (row of cards of a certain type?),
-      // and in each slice over the elements (individual card) and display each. => OK!
     });
   }
-  // initialyze apollo client for graphql querys with the schema(fragmentTypes) created by schemaQuery.js file
+  // initialize apollo client for graphql querys with the schema(fragmentTypes) created by schemaQuery.js file
   client = new ApolloClient({
     link: PrismicLink({
       uri: "https://sunrise-app.prismic.io/graphql"
@@ -70,70 +63,18 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
     // query prismic using possibilities wrote in the schema file (fragmentTypes.json)
     this.client.query({
-      query: gql`
-      query{
-        page(uid:"plop",lang:"en-us"){
-          url
-          body{
-            ... on PageBodyCardsGroupSmall{
-              fields{
-                cardsgroupsmall{
-                  ... on CardSmall{
-                    title
-                    cardImage
-                    cardLink
-                    cardBackgroundColor
-                    ismobile
-                  }
-                }
-              }
-            }
-          ... on PageBodyCardsGroupMedium{
-            fields{
-              cardsGroupMedium{
-                ... on CardMedium{
-                  title
-                  cardImg
-                  cardBtnText
-                  cardBtnLink
-                  cardBackgroundColor
-                  ismobile
-                  cardText
-                  }
-                }
-              }
-            }
-            __typename
-            ... on PageBodyDiscountcountdown{
-              fields{
-                discountico
-                discountdate
-              }
-            }
-          }   
-        }
-      }
-      `
+      query: query(this.url, "en-us")
     }).then((response: any) => {  
-      //console.log(response)    
+      console.log(response)    
       // if the url page don't match with the url from prismic page document, then error 404 not found
       if(response.data.page.url === this.url === false){
         this.notFound = true      
         return;
       }
-      // map of the response and adding every slice required in the prismic data temp array     
-      response.data.page.body.map((elem:any, index: number ) => (        
-        elem.__typename === 'PageBodyCardsGroupSmall' ? this.cardsGroupSmall = elem.fields : console.log(),
-        elem.__typename === 'PageBodyCardsGroupMedium' ? this.cardsGroupMedium = elem.fields : console.log(),        
-        elem.__typename === 'PageBodyDiscountcountdown' ? this.countdown = elem.fields : console.log()        
+      // map of the response and push in prismicData array
+      response.data.page.body.map((slice:any,index:number) => (
+        this.prismicData.push(slice)
       ));
-      // then, adding data in prismic data array
-      this.prismicData = {
-        'cardsGroupSmall' : this.cardsGroupSmall,
-        'cardsGroupMedium' : this.cardsGroupMedium,
-        'countdown': this.countdown
-      }
-      console.log(this.prismicData.countdown[0].discountdate); 
     // if error =>        
     }).catch((error: any) => {
       console.error(error);

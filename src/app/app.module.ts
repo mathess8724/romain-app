@@ -7,6 +7,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './page/page.component';
 import { CountdownComponent } from './countdown/countdown.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { CardsSmallGroupComponent } from './cards-small-group/cards-small-group.component';
+import { CardsMediumGroupComponent } from './cards-medium-group/cards-medium-group.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +18,9 @@ import { CountdownComponent } from './countdown/countdown.component';
     FooterComponent,
     PageComponent,
     CountdownComponent,
+    CarouselComponent,
+    CardsSmallGroupComponent,
+    CardsMediumGroupComponent,
     
   ],
   imports: [

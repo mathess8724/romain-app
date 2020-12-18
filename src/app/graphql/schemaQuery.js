@@ -23,7 +23,7 @@ fetch(`https://${repoId}.prismic.io/api`)
           (type) => type.possibleTypes !== null,
         );
         filteredResults.data.__schema.types = filteredData;
-        fs.writeFileSync('./src/app/introspectionFragment/fragmentTypes.json', JSON.stringify(filteredResults.data), (err) => {
+        fs.writeFileSync('./src/app/graphql/fragmentTypes.json', JSON.stringify(filteredResults.data), (err) => {
           if (err) {
             console.error('Error writing fragmentTypes file', err);
           } else {
