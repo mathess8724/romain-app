@@ -1,1 +1,35 @@
-<p>cards-small-group works!</p>
+
+    <div [ngSwitch]="slice.primary.title[0].type">
+        <h1 *ngSwitchCase="'heading1'" style="text-align: center;">{{slice.primary.title[0].text}}</h1>
+        <h2 *ngSwitchCase="'heading2'" style="text-align: center;">{{slice.primary.title[0].text}}</h2>
+        <h3 *ngSwitchCase="'heading3'" style="text-align: center;">{{slice.primary.title[0].text}}</h3>
+        <h4 *ngSwitchCase="'heading4'" style="text-align: center;">{{slice.primary.title[0].text}}</h4>
+        <h5 *ngSwitchCase="'heading5'" style="text-align: center;">{{slice.primary.title[0].text}}</h5>
+        <h6 *ngSwitchCase="'heading6'" style="text-align: center;">{{slice.primary.title[0].text}}</h6>
+
+    </div>
+<div class="container-fluid cards-small-group-container">
+    <div class="row">
+        <div class="col-sm" *ngFor="let card of slice.fields" >
+            <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card card-small " >
+                <img src="{{card.cardsgroupsmall.cardImage.url}}" class="card-img-top card-small-img" alt="...">
+                <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card-body card-small-body">
+                  <p class="card-text card-small-text">{{card.cardsgroupsmall.title[0].text}}</p>                  
+                </div>
+              </div>
+          </div>
+    </div>
+</div>
+<!-- <div class="container-fluid">
+    <div class="row" >
+        <div class="col-sm" *ngFor="let card of slice.fields" >
+          <div class="card container-2-card " >
+            <img src="" style="margin-top: 15px; height: 80px; width: 80px;"
+                 class="card-img-top" alt="">
+            <div class="card-body">
+              <p class="card-text">text</p>
+            </div>
+          </div>
+        </div>
+    </div>
+</div> -->

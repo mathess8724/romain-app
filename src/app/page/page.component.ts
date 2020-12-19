@@ -73,6 +73,7 @@ export class PageComponent implements OnInit {
       }
       // map of the response and push in prismicData array
       response.data.page.body.map((slice:any,index:number) => (
+
         this.prismicData.push(slice)
       ));
     // if error =>        

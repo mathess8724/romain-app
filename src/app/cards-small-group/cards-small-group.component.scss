@@ -1,0 +1,36 @@
+.cards-small-group-container
+{
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    //background-color: red;
+    width: 90vw;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+.card-small
+{
+    width: 180px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.card-small-img
+{
+    height: 50px;
+    width: 50px;
+    
+}
+.card-small-text
+{
+    //background-color: white;
+    text-align: center;
+    //width: 150px;
+}
+.card-small-body
+{
+    width: 100%;
+}

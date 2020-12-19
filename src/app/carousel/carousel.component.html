@@ -1,1 +1,24 @@
-<p>carousel works!</p>
+
+<div class="container carousel-container">
+
+    <div class="container " style="justify-content: center; align-items: center; width: 100%;">
+        <div class="row" *ngFor="let slice of slice.fields">
+            <div class="card bg-transparent text-white col-sm"  style=" max-width: 800px;">
+                <img src="{{slice.carouselImg.img.url}}" class="card-img" alt="..." style="width: 100%;"> 
+                <div class="card-img-overlay">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text"></p>
+                  <p class="card-text">Last updated 3 mins ago</p>
+                </div>
+              </div>
+           
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

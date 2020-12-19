@@ -11,6 +11,7 @@ export class CarouselComponent implements OnInit {
   @Input() public slice: any;
 
   ngOnInit(): void {
+    console.log(this.slice.fields)
   }
 
 }

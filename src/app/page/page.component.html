@@ -1,13 +1,15 @@
-<div *ngIf="notFound === true" class="notFound">
-  error 404 not found :'(
+<app-header></app-header>
+<div *ngIf="notFound === true" class="notFound" style="height: 100vh; display: flex; justify-content: center; align-items: center;">
+ <h1 style="text-align: center;"> error 404 not found :'(</h1>
   </div>
-  <app-header></app-header>
-  <div class="container" *ngFor="let slice of this.prismicData">
-    <div  [ngSwitch]="slice.type">     
-      <app-carousel *ngSwitchCase="'carousel'" [slice]="slice"></app-carousel>
-      <app-cards-small-group *ngSwitchCase="'cards-group-small'" [slice]="slice"></app-cards-small-group>
-      <app-cards-medium-group *ngSwitchCase="'cards-group-medium'" [slice]="slice"></app-cards-medium-group>
-     </div>
+  <div class="container-fluid page-container">
+    <div  *ngFor="let slice of this.prismicData" >
+      <div  [ngSwitch]="slice.type">     
+        <app-carousel *ngSwitchCase="'carousel'" [slice]="slice"></app-carousel>
+        <app-cards-small-group *ngSwitchCase="'cards-group-small'" [slice]="slice"></app-cards-small-group>
+        <app-cards-medium-group *ngSwitchCase="'cards-group-medium'" [slice]="slice"></app-cards-medium-group>
+       </div>
+    </div>
   </div>
   <app-footer></app-footer>
 

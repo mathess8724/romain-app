@@ -9,6 +9,8 @@ export class CardsSmallGroupComponent implements OnInit {
 
   constructor() { }
   @Input() public slice: any;
+  @Input() ngSwitch: any;
+  //@Input() public ngClass: string ;
 
   ngOnInit(): void {
   }
