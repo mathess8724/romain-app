@@ -1,0 +1,22 @@
+<div [ngSwitch]="slice.primary.title[0].type">
+    <h1 *ngSwitchCase="'heading1'" style="text-align: center;">{{slice.primary.title[0].text}}</h1>
+    <h2 *ngSwitchCase="'heading2'" style="text-align: center;">{{slice.primary.title[0].text}}</h2>
+    <h3 *ngSwitchCase="'heading3'" style="text-align: center;">{{slice.primary.title[0].text}}</h3>
+    <h4 *ngSwitchCase="'heading4'" style="text-align: center;">{{slice.primary.title[0].text}}</h4>
+    <h5 *ngSwitchCase="'heading5'" style="text-align: center;">{{slice.primary.title[0].text}}</h5>
+    <h6 *ngSwitchCase="'heading6'" style="text-align: center;">{{slice.primary.title[0].text}}</h6>
+</div>
+<div class="container-fluid cards-large-group-container" >
+    <div class="row">
+        <div class="col-sm" *ngFor="let card of slice.fields">
+            <div [ngClass]="card.cardLarge.cardBackgroundColor" class="card card-large" >
+                <img src="{{card.cardLarge.cardImg.url}}" class="card-img-top card-large-img" alt="...">
+                <div [ngClass]="card.cardLarge.cardBackgroundColor" class="card-body">
+                  <h5 class="card-title">{{card.cardLarge.title[0].text}}</h5>
+                  <p class="card-text">{{card.cardLarge.cardText[0].text}}</p>
+                  <a target="blank" href="{{card.cardLarge.cardBtnLink}}" class="btn btn-card-large btn-danger">{{card.cardLarge.cardBtnText[0].text}}</a>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

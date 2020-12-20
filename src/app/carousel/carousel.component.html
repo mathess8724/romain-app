@@ -1,21 +1,22 @@
-
-<div class="container carousel-container">
-
-    <div class="container " style="justify-content: center; align-items: center; width: 100%;">
-        <div class="row" *ngFor="let slice of slice.fields">
-            <div class="card bg-transparent text-white col-sm"  style=" max-width: 800px;">
-                <img src="{{slice.carouselImg.img.url}}" class="card-img" alt="..." style="width: 100%;"> 
+<!-- <div class="container carousel-container"> -->
+    <div class="container carousel-container" style="justify-content: center; align-items: center; width: 100%;">
+        <div class="row" *ngFor="let card of slice.fields">
+            <div class="card card-carousel bg-transparent text-white col-sm"  style=" max-width: 800px; position: relative;">
+                <img src="{{card.carouselImg.img.url}}" class="card-img" alt="..." style="width: 100%;"> 
                 <div class="card-img-overlay">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text"></p>
                   <p class="card-text">Last updated 3 mins ago</p>
                 </div>
-              </div>
-           
-            
+                <div *ngIf="card.countdown" class="countdown-container">                   
+                    <div class="counter">
+                        <app-countdown [icoUrl]="card.countdown.ico.url" [finishdate]="card.countdown.endDate"></app-countdown>
+                    </div>
+                </div>
+              </div>          
         </div>
     </div>
-</div>
+<!-- </div> -->
 
 
 

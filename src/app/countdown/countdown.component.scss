@@ -1,6 +1,6 @@
 .container
 {
-    position: absolute;
+    /* position: absolute;
     top: -25px;
     //margin-left: -60px;
     background-color: rgb(238, 238, 238);
@@ -10,5 +10,16 @@
     border: 1px solid black;
     display:flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
+}
+.countdown-container
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    color: red;
+}
+.countdownIco
+{
+    margin-right: 10px;
 }

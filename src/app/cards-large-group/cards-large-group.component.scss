@@ -1,0 +1,25 @@
+
+.cards-large-group-container
+{
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    //background-color: red;
+    width: 90vw;
+    margin-bottom: 50px;
+    margin-top: 30px;
+    
+}
+.card-large
+{
+    width: 330px;
+}
+.card-large-img
+{
+    height: 200px;
+}
+.btn-card-large
+{
+    width: 150px;
+    border-radius: 30px;
+}

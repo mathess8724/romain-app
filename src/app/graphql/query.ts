@@ -63,6 +63,25 @@ const query = (url:string, lang:string) =>{
               }
             }
           }
+          ... on PageBodyCardsLargeGroup{
+            type
+            primary{
+              title
+            }
+            fields{
+              cardLarge{
+              ... on CardLarge{
+                title
+                cardImg
+                cardText
+                cardBtnText
+                cardBtnLink          
+                cardBackgroundColor
+                ismobile
+              }
+              }
+            }
+          }
         }
       }
     }

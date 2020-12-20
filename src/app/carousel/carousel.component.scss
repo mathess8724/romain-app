@@ -13,3 +13,26 @@
 {
     height: 300px;
 }
+.card-carousel
+{
+    display: flex;
+    align-items: center;
+}
+.countdown-container
+{
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    width: 250px;
+    height: 50px;
+    top: -25px;
+    border: 1px solid rgb(232, 232, 232);
+    background-color: rgb(251, 252, 251);
+}
+.countdown-ico
+{
+    height: 30px;
+    width: 30px;
+}
