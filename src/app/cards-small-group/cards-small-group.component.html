@@ -8,15 +8,34 @@
         <h6 *ngSwitchCase="'heading6'" style="text-align: center;">{{slice.primary.title[0].text}}</h6>
 
     </div>
-<div class="container-fluid cards-small-group-container">
-    <div class="row">
-        <div class="col-sm" *ngFor="let card of slice.fields" >
-            <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card card-small " >
+   
+<div class="container cards-small-group-container">
+    <div class="row" style="display: flex; justify-content: space-around;">
+        <div class="col-6 col-md-2" *ngFor="let card of slice.fields" >
+          
+          <div [ngSwitch]="card.cardsgroupsmall.blanklink"> 
+            <!-- <p> link : {{card.cardsgroupsmall.cardLink}}</p> -->
+            <a href={{card.cardsgroupsmall.cardLink}} *ngSwitchCase="false" style="text-decoration: none; color: black ;">
+              <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card card-small " >
+                <img src="{{card.cardsgroupsmall.cardImage.url}}" class="card-img-top card-small-img" alt="...">
+                <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card-body card-small-body">
+                  <p class="card-text card-small-text" >{{card.cardsgroupsmall.title[0].text}}</p>                  
+                
+                </div>
+              </div>
+            </a>
+            <a href={{card.cardsgroupsmall.cardlink}} target="_blank" *ngSwitchCase="true" style="text-decoration: none; color: black;">
+              <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card card-small " >
                 <img src="{{card.cardsgroupsmall.cardImage.url}}" class="card-img-top card-small-img" alt="...">
                 <div [ngClass]="card.cardsgroupsmall.cardBackgroundColor"  class="card-body card-small-body">
                   <p class="card-text card-small-text">{{card.cardsgroupsmall.title[0].text}}</p>                  
+                
                 </div>
               </div>
+            </a>
+            
+          </div>
+            
           </div>
     </div>
 </div>

@@ -11,6 +11,7 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { CardsSmallGroupComponent } from './cards-small-group/cards-small-group.component';
 import { CardsMediumGroupComponent } from './cards-medium-group/cards-medium-group.component';
 import { CardsLargeGroupComponent } from './cards-large-group/cards-large-group.component';
+import { RichTextComponentComponent } from './rich-text-component/rich-text-component.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CardsLargeGroupComponent } from './cards-large-group/cards-large-group.
     CardsSmallGroupComponent,
     CardsMediumGroupComponent,
     CardsLargeGroupComponent,
+    RichTextComponentComponent,
     
   ],
   imports: [

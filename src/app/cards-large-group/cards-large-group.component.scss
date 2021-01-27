@@ -23,3 +23,12 @@
     width: 150px;
     border-radius: 30px;
 }
+
+@media screen and (max-width: 576px)
+{
+    .card-large
+{
+    width: 100%;
+    margin-bottom: 30px;
+}
+}

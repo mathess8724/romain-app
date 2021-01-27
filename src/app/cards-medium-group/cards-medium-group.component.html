@@ -7,26 +7,37 @@
     <h6 *ngSwitchCase="'heading6'" style="text-align: center;">{{slice.primary.title[0].text}}</h6>
 </div>
 
-<div class="container-fluid cards-medium-group-container">
+
+<div class="container cards-medium-group-container">
     <div class="row">
         <div class="col-sm" *ngFor="let card of slice.fields" style="position: relative;">
             <div [ngClass]="card.cardsGroupMedium.cardBackgroundColor"  class="card card-medium " >
+                <div [ngSwitch]="card.cardsGroupMedium.blanklink" >
+                    <a  *ngSwitchCase="true" href="" style="text-decoration: none; color: black;">link: {{card.cardsGroupMedium.cardBtnLink}}</a>
+                    <a  *ngSwitchCase="false" href="" style="text-decoration: none; color: black;">blank link : {{card.cardsGroupMedium.cardBtnLink}} </a>
+                </div>
                 <!-- <img src="{{card.cardsGroupMedium.cardImg.url}}" class="card-img-top card-medium-img" alt="..."> -->
                 <div [ngClass]="card.cardsGroupMedium.cardBackgroundColor"  class="card-body card-medium-body">
                     <!-- <p class="card-text card-medium-text">{{card.cardsGroupMedium.title[0].text}}</p> -->                  
                 </div>
-            </div>
-            <div [ngSwitch]="card.cardsGroupMedium.cardBtnText[0].type">
-                <button *ngSwitchCase="'heading4'" type="button" class="btn btn-card-medium btn-light">                    
-                    <h4 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}}</h4>
-                </button>
-                <button *ngSwitchCase="'heading5'" type="button" class="btn btn-card-medium btn-light">                    
-                    <h5 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}}</h5>
-                </button>
-                <button *ngSwitchCase="'heading6'" type="button" class="btn btn-card-medium btn-light">                    
-                    <h6 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}}</h6>
-                </button>
-            </div>
+                <div [ngSwitch]="card.cardsGroupMedium.blanklink">
+                    <div *ngSwitchCase="true"> </div>
+                    <a href="{{card.cardsGroupMedium.cardlink}}"> 
+                        <div [ngSwitch]="card.cardsGroupMedium.cardBtnText[0].type">
+                
+                            <button *ngSwitchCase="'heading4'" type="button" class="btn btn-card-medium btn-light">                    
+                                <h4 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}} </h4>
+                            </button>
+                            <button *ngSwitchCase="'heading5'" type="button" class="btn btn-card-medium btn-light">                    
+                                <h5 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}}</h5>
+                            </button>
+                            <button *ngSwitchCase="'heading6'" type="button" class="btn btn-card-medium btn-light">                    
+                                <h6 style="text-align: center;">{{card.cardsGroupMedium.cardBtnText[0].text}}</h6>
+                            </button>
+                        </div>
+                    </a>
+                </div>
+            </div>            
           </div>
     </div>
 </div>

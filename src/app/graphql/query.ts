@@ -40,6 +40,7 @@ const query = (url:string, lang:string) =>{
                   cardLink
                   cardBackgroundColor
                   ismobile
+                  blanklink
                 }
               }
             }
@@ -59,6 +60,7 @@ const query = (url:string, lang:string) =>{
                   cardBtnLink
                   cardBackgroundColor
                   ismobile
+                  blanklink
                 }
               }
             }
@@ -78,8 +80,15 @@ const query = (url:string, lang:string) =>{
                 cardBtnLink          
                 cardBackgroundColor
                 ismobile
+                blanklink
               }
               }
+            }
+          }
+          ... on PageBodyRichtext{
+            type
+            fields{
+              richtext
             }
           }
         }

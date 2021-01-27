@@ -13,6 +13,7 @@ export class CardsSmallGroupComponent implements OnInit {
   //@Input() public ngClass: string ;
 
   ngOnInit(): void {
+    
   }
 
 }

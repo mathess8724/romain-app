@@ -7,6 +7,8 @@ let InMemoryCache = require("apollo-cache-inmemory").InMemoryCache;
 let ApolloClient = require("apollo-client").ApolloClient;
 let gql = require("graphql-tag");
 let PrismicLink = require("apollo-link-prismic").PrismicLink;
+let PrismicDOM = require('prismic-dom');
+import linkResolver from '../../app/graphql/linkResolver';
 
 // initialize the fragmentMatcher for querys
 // !! the fragmentTypes json file is a scheman who is created with 'schemaQuery.js' file, don't forget 
@@ -61,13 +63,14 @@ export class PageComponent implements OnInit {
   //--------------------------------------------------------
 
   ngOnInit(): void {
+    console.log(this.url)
     // query prismic using possibilities wrote in the schema file (fragmentTypes.json)
     this.client.query({
       query: query(this.url, "en-us")
     }).then((response: any) => {  
       console.log(response)    
       // if the url page don't match with the url from prismic page document, then error 404 not found
-      if(response.data.page.url === this.url === false){
+      if(response.data.page.url === this.url === false ){
         this.notFound = true      
         return;
       }
@@ -79,6 +82,8 @@ export class PageComponent implements OnInit {
     // if error =>        
     }).catch((error: any) => {
       console.error(error);
+      this.notFound = true
+      return;
     });
    //--------------------------------------------------------------------------------
 
